@@ -15,7 +15,7 @@ Address untuk Prefix IP Kelompok kami adalah `10.35`
 ## Topologi dan Persiapan
 
 Membuat topologi sebagai berikut:  
-![Topology](Image/TopologyPraktikum3.jpeg)  
+![Topology](Image/TopologyPraktikum3.jpg)  
   
 Mengatur _Network Configuration_ pada router `Foosha`, serta node `EniesLobby`. `Water7` dan `Jipangu`. pengaturan config nya sebagai berikut:  
   
