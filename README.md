@@ -327,7 +327,23 @@ Bisa dilihat bahwa nama pengakses berubah menjadi `jualbelikapal.e12.com` pada d
 Agar transaksi jual beli lebih aman dan pengguna website ada dua orang, proxy dipasang autentikasi user proxy dengan enkripsi MD5 dengan dua username, yaitu luffybelikapalyyy dengan password luffy_yyy dan zorobelikapalyyy dengan password zoro_yyy.
 
 **Pembahasan:**
-1. 
+1. Langkah pertama membuat autentikasi adalah menggunakan fungsi `htpasswd`. Untuk soal ini ada dua user yaitu **luffybelikapalE12** dan **zorobelikapalE12** sebagai berikut
+```
+  htpasswd -c /etc/squid/passwd luffybelikapalE12
+  password : luffy_e12
+
+  htpasswd /etc/squid/passwd zorobelikapalE12
+  password : zoro_e12
+```
+2. Lalu, kita implementasikan user tersebut dengan mengubah konfigurasi pada `squid.conf` menjadi berikut
+![image](https://user-images.githubusercontent.com/55140514/141611100-93b5ebda-d0fe-43ab-a281-6826e357aa46.png)
+
+   Setelah itu dilakukan `service squid restart`
+3. Terakhir kita testing dengan `lynx google.com` lagi. Hasilnya akan menjadi berikut
+![image](https://user-images.githubusercontent.com/55140514/141611187-53b96d81-9a21-4e78-8d7b-c2f7e327fac3.png)
+![image](https://user-images.githubusercontent.com/55140514/141611194-013ddb69-8f89-4867-931e-1c18ab6f2030.png)
+
+   Untuk mengakses hanya bisa jika telah memasukkan `user` dan `password` yang sudah di implementasikan
 
 ## Soal 10
 
