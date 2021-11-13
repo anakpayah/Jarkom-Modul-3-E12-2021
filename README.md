@@ -319,7 +319,7 @@ Setelah itu kita memasangkan proxy pada client ini dengan mengarah ke proxy yang
 
 Bisa dilihat bahwa nama pengakses berubah menjadi `jualbelikapal.e12.com` pada di bawah
 
-**Note**
+### Note
 1. Karena kita tidak menggunakan perintah untuk mengakses web maka kita tidak bisa masuk ke `google.com`. Untuk itu kita merubahkan `squid.conf` dengan menambah line `http_access allow all`
 
 ## Soal 9
