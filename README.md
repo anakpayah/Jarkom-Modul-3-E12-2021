@@ -155,7 +155,7 @@ Dapat diubah juga dengan mengedit file konfogurasinya _/etc/default/isc-dhcp-rel
       #
 
       # What servers should the DHCP relay forward requests to?
-      SERVERS="10.36.2.4"
+      SERVERS="10.35.2.4"
 
       # On what interfaces should the DHCP relay (dhrelay) serve DHCP requests?
       INTERFACES="eth1 eth2 eth3"
@@ -266,3 +266,31 @@ d. Skypie
   
   
 ## Soal 7
+
+Luffy dan Zoro berencana menjadikan Skypie sebagai server untuk jual beli kapal yang dimilikinya dengan alamat IP yang tetap dengan IP [prefix IP].3.69. Dalam kasus ini, IP yang digunakan adalah 10.35.3.69.
+
+**Pembahasan : **
+
+1. Lakukan ```ip a``` pada client Skypie untuk melakukan pengecekkan link/ether pada eth0 Skypie. Pada kasus ini, link/ether pada eth0 client Skypie adalah sebagai berikut.
+![link_ether_skypie](https://cdn.discordapp.com/attachments/837808310358507520/908953094488981524/unknown.png)
+
+2. Buka client Skypie dan lakukan konfigurasi sebagai berikut pada file ```/etc/network/interfaces```.
+```
+auto eth0
+iface eth0 inet dhcp
+hwaddress ether f6:9a:aa:fb:c7:78
+```
+
+3. Buka Jipangu lalu edit file ```/etc/dhcp/dhcpd.conf``` dan tambahkan konfigurasi sebagai berikut.
+```
+host Skypie {
+    hardware ethernet f6:9a:aa:fb:c7:78;
+    fixed-address 10.35.3.69;
+}
+```
+hardware ethernet yang digunakan merupakan link/ether dari eth0 Skypie, lalu fixed-address menyesuaikan dengan instruksi yang diberikan dari soal. Setelah melakukan konfigurasi, restart dhcp server dengan perintah ```service isc-dhcp-server restart```.
+
+4. Lakukan pengecekkan dengan menggunakan ```ip a```. Apabila ip inet pada eth0 Skypie telah berubah menjadi sebagai berikut, maka Luffy dan Zoro telah berhasil menjadikan Skypie sebagai server untuk jual beli kapal.
+![ip_skypie](https://cdn.discordapp.com/attachments/837808310358507520/908954738261889034/unknown.png)
+
+## Soal 8
