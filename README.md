@@ -365,6 +365,7 @@ http_access allow AVAILABLE_WORKING3 USERS
 http_access deny all
 ```
    Menjadi seperti berikut
+   
 ![image](https://user-images.githubusercontent.com/55140514/141611675-99373b2a-df22-42f0-8e7e-3dd8b42e1fa8.png)
     
    Disini kita mengganti `http_access allow all` dan diganti menjadi `http_acces AVAILABLE_WORKINGx` untuk tiap grup waktu serta menambah `http_access deny all` agar hanya yang mempunyai **user** atau yang termasuk dari grup **acl USERS** saja yang bisa mengakses. Setelah itu dilakukan `service squid restart`.
@@ -375,11 +376,13 @@ date --set "11 Nov 2021 11:00:00"
 date --set "11 Nov 2021 18:00:00"
 ```
 **Diluar eange waktu akses**
+
 ![image](https://user-images.githubusercontent.com/55140514/141612002-913b33e6-a06a-42ec-8c88-cede26f4aabb.png)
 ![image](https://user-images.githubusercontent.com/55140514/141612023-7d0479b9-549a-4299-9bfa-906845535f95.png)
 ![image](https://user-images.githubusercontent.com/55140514/141612032-2bfff301-be0b-49e0-8b4a-175456fb5205.png)
 
 **Didalam range waktu akses**
+
 ![image](https://user-images.githubusercontent.com/55140514/141612061-d0957eb4-fbe3-4a56-97c4-90e017f117fa.png)
 ![image](https://user-images.githubusercontent.com/55140514/141612083-9143a595-035c-4632-a657-be24abfd156b.png)
 ![image](https://user-images.githubusercontent.com/55140514/141612093-c45ec6a4-2899-47f6-b96d-7d8fa5793fbd.png)
