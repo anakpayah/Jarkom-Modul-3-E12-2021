@@ -480,10 +480,13 @@ Lalu, ada juga fungsi acl `proxy_auth_regex` dimana akan mengambil nama dari use
 
 Setelah itu di restart proxy nya dengan `service squid restart`
 5. Kita lakukan testing dengan kedua user tersebut
+
 **User luffybelikapalE12**
+
 ![image](https://user-images.githubusercontent.com/55140514/141622244-5992c4e3-393c-4a9e-bfcf-6194dd53cc3c.png)
 
 **User ZorobelikapalE12**
+
 ![image](https://user-images.githubusercontent.com/55140514/141624051-9d908361-9824-4539-bb8a-964196608311.png)
 
 ### Note
