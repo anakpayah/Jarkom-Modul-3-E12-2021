@@ -356,6 +356,33 @@ acl AVAILABLE_WORKING1 time MTWH 07:00-11:00
 acl AVAILABLE_WORKING2 time TWHF 17:00-24:00
 acl AVAILABLE_WORKING3 time WHFA 00:00-03:00
 ```
+2. Setelah itu akan kita masukkan file `acl.conf` tersebut ke dalam `squid.conf` dengan menambah berikut
+```
+include /etc/squid/acl.conf
+http_access allow AVAILABLE_WORKING1 USERS
+http_access allow AVAILABLE_WORKING2 USERS
+http_access allow AVAILABLE_WORKING3 USERS
+http_access deny all
+```
+   Menjadi seperti berikut
+![image](https://user-images.githubusercontent.com/55140514/141611675-99373b2a-df22-42f0-8e7e-3dd8b42e1fa8.png)
+    
+   Disini kita mengganti `http_access allow all` dan diganti menjadi `http_acces AVAILABLE_WORKINGx` untuk tiap grup waktu serta menambah `http_access deny all` agar hanya yang mempunyai **user** atau yang termasuk dari grup **acl USERS** saja yang bisa mengakses. Setelah itu dilakukan `service squid restart`.
+   
+3. Dilakukan testing dengan mengatur **date** pada client dengan 2 waktu yang berbeda. Satu untuk waktu yang bisa diberi akses dan satu lagi untuk diluar waktu akses. Waktu tersebut adalah Jum'at, 11 NOV 2021 11:00 dan Jum'at, 11 NOV 18:00
+```
+date --set "11 Nov 2021 11:00:00"
+date --set "11 Nov 2021 18:00:00"
+```
+**Diluar eange waktu akses**
+![image](https://user-images.githubusercontent.com/55140514/141612002-913b33e6-a06a-42ec-8c88-cede26f4aabb.png)
+![image](https://user-images.githubusercontent.com/55140514/141612023-7d0479b9-549a-4299-9bfa-906845535f95.png)
+![image](https://user-images.githubusercontent.com/55140514/141612032-2bfff301-be0b-49e0-8b4a-175456fb5205.png)
+
+**Didalam range waktu akses**
+![image](https://user-images.githubusercontent.com/55140514/141612061-d0957eb4-fbe3-4a56-97c4-90e017f117fa.png)
+![image](https://user-images.githubusercontent.com/55140514/141612083-9143a595-035c-4632-a657-be24abfd156b.png)
+![image](https://user-images.githubusercontent.com/55140514/141612093-c45ec6a4-2899-47f6-b96d-7d8fa5793fbd.png)
 
 ## Soal 11
 
