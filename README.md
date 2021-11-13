@@ -272,7 +272,7 @@ Luffy dan Zoro berencana menjadikan Skypie sebagai server untuk jual beli kapal 
 **Pembahasan : **
 
 1. Lakukan ```ip a``` pada client Skypie untuk melakukan pengecekkan link/ether pada eth0 Skypie. Pada kasus ini, link/ether pada eth0 client Skypie adalah sebagai berikut.
-![link_ether_skypie](https://cdn.discordapp.com/attachments/837808310358507520/908953094488981524/unknown.png)
+![link_ether_skypie](https://github.com/anakpayah/Jarkom-Modul-3-E12-2021/blob/main/Image/ip_a_skypie_1.JPG)
 
 2. Buka client Skypie dan lakukan konfigurasi sebagai berikut pada file ```/etc/network/interfaces```.
 ```
@@ -290,7 +290,41 @@ host Skypie {
 ```
 hardware ethernet yang digunakan merupakan link/ether dari eth0 Skypie, lalu fixed-address menyesuaikan dengan instruksi yang diberikan dari soal. Setelah melakukan konfigurasi, restart dhcp server dengan perintah ```service isc-dhcp-server restart```.
 
-4. Lakukan pengecekkan dengan menggunakan ```ip a```. Apabila ip inet pada eth0 Skypie telah berubah menjadi sebagai berikut, maka Luffy dan Zoro telah berhasil menjadikan Skypie sebagai server untuk jual beli kapal.
-![ip_skypie](https://cdn.discordapp.com/attachments/837808310358507520/908954738261889034/unknown.png)
+4. Lakukan pengecekkan dengan menggunakan ```ip a```. Apabila ip inet pada eth0 Skypie telah berubah menjadi ```10.35.3.69```, maka Luffy dan Zoro telah berhasil menjadikan Skypie sebagai server untuk jual beli kapal.
+![ip_skypie](https://github.com/anakpayah/Jarkom-Modul-3-E12-2021/blob/main/Image/ip_a_skypie_2.JPG)
 
 ## Soal 8
+
+Loguetown digunakan sebagai client Proxy agar transaksi jual beli dapat terjamin keamanannya, juga untuk mencegah kebocoran data transaksi. Pada Loguetown, proxy harus bisa diakses dengan nama jualbelikapal.yyy.com dengan port yang digunakan adalah 5000.
+
+**Pembahasan : **
+
+## Soal 9
+
+Agar transaksi jual beli lebih aman dan pengguna website ada dua orang, proxy dipasang autentikasi user proxy dengan enkripsi MD5 dengan dua username, yaitu luffybelikapalyyy dengan password luffy_yyy dan zorobelikapalyyy dengan password zoro_yyy.
+
+**Pembahasan : **
+
+## Soal 10
+
+Transaksi jual beli tidak dilakukan setiap hari, oleh karena itu akses internet dibatasi hanya dapat diakses setiap hari Senin-Kamis pukul 07.00-11.00 dan setiap hari Selasa-Jum’at pukul 17.00-03.00 keesokan harinya (sampai Sabtu pukul 03.00).
+
+**Pembahasan : **
+
+## Soal 11
+
+Agar transaksi bisa lebih fokus berjalan, maka dilakukan redirect website agar mudah mengingat website transaksi jual beli kapal. Setiap mengakses google.com, akan diredirect menuju super.franky.yyy.com dengan website yang sama pada soal shift modul 2. Web server super.franky.yyy.com berada pada node Skypie.
+
+**Pembahasan : **
+
+## Soal 12
+
+Saatnya berlayar! Luffy dan Zoro akhirnya memutuskan untuk berlayar untuk mencari harta karun di super.franky.yyy.com. Tugas pencarian dibagi menjadi dua misi, Luffy bertugas untuk mendapatkan gambar (.png, .jpg), sedangkan Zoro mendapatkan sisanya. Karena Luffy orangnya sangat teliti untuk mencari harta karun, ketika ia berhasil mendapatkan gambar, ia mendapatkan gambar dan melihatnya dengan kecepatan 10 kbps.
+
+**Pembahasan : **
+
+## Soal 13
+
+Sedangkan, Zoro yang sangat bersemangat untuk mencari harta karun, sehingga kecepatan kapal Zoro tidak dibatasi ketika sudah mendapatkan harta yang diinginkannya.
+
+**Pembahasan : **
