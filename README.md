@@ -350,6 +350,12 @@ Agar transaksi jual beli lebih aman dan pengguna website ada dua orang, proxy di
 Transaksi jual beli tidak dilakukan setiap hari, oleh karena itu akses internet dibatasi hanya dapat diakses setiap hari Senin-Kamis pukul 07.00-11.00 dan setiap hari Selasa-Jum’at pukul 17.00-03.00 keesokan harinya (sampai Sabtu pukul 03.00).
 
 **Pembahasan:**
+1. Pada soal ini diminta untuk mengubah waktu akses / pembatasan waktu akses ke web yg dituju. Untuk melakukan itu maka kita akan merubahkan `squid.conf`. Pertama kita membuat sebuah file yg akan berisi fungsi `acl` dengan perintah `time` untuk mengatur waktunya sesuai dengan yang diinginkan soal. Dilakukan `nano /etc/squid/acl.conf` dengan isinya sebagai berikut
+```
+acl AVAILABLE_WORKING1 time MTWH 07:00-11:00
+acl AVAILABLE_WORKING2 time TWHF 17:00-24:00
+acl AVAILABLE_WORKING3 time WHFA 00:00-03:00
+```
 
 ## Soal 11
 
