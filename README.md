@@ -426,7 +426,8 @@ unzip super.franky.zip
 cp -r /etc/apache2/sites-available/000.default.conf /etc/apache2/sites-available/super.franky.e12.com.conf
 ```
 5. Lalu, kita masuk ke file `super.franky.e12.com.conf` dan mengubah konfigurasi `DocumentRoot`, `ServerName`, dan `ServerAlias` seperti berikut
- ![image](https://user-images.githubusercontent.com/55140514/141613479-b634f83c-ddf7-43fb-8b81-d2909abff4e9.png)
+
+![image](https://user-images.githubusercontent.com/55140514/141613479-b634f83c-ddf7-43fb-8b81-d2909abff4e9.png)
 
 6. Selanjutnya kita membuat directory untuk isi web kita seperti berikut 
 `mkdir /var/www/super.franky.e12.com`
