@@ -462,3 +462,29 @@ Disini kita membuat acl grup bernama `BLACKLIST` yang berisikan domain name yang
 - **No 13** : Sedangkan, Zoro yang sangat bersemangat untuk mencari harta karun, sehingga kecepatan kapal Zoro tidak dibatasi ketika sudah mendapatkan harta yang diinginkannya.
 
 **Pembahasan:**
+1. Pada soal ini diminta agar ketika proxy user Luffy mendownload gambar (.png, .jpg) kecepatan nya ter-limit menjadi 10 kbps sedangkan untuk zoro limit tersebut tidak berlaku.
+2. Pertama, kita akan membuat file untuk peraturan pembatasan bandwidthnya. Kita menamakan file tersebut `acl-bandwidth.conf` dan dibuat pada `/etc/squid/acl-bandwidth.conf`
+3. Pada file `acl-bandwidth.conf` kita membuat konfigurasi berikut
+```
+acl luffyimage url_regex png$|jpg$
+acl luffyuser proxy_auth_regex luffy
+delay_pools 1
+delay_class 1 1
+delay_access 1 allow luffyuser luffyimage
+delay_parameters 1 1250/1250
+```
+Disini kita hanya menggunakan 1 peraturan dimana itu mengatur hanya kecepatan untuk user luffy. Pertama kita menggunakan fungsi acl `url_regex` untuk mengambil file yang berakhiran dengan **png atau jpg**, kita masukkan peraturan ini pada acl grup `luffyuser`.
+Lalu, ada juga fungsi acl `proxy_auth_regex` dimana akan mengambil nama dari user untuk autentikasi proxy yang digunakan. Disini kita set untuk mencari nama luffy. Untuk kecepatan kita rubah pada `delay_parameters` dimana kita set untuk menjadi 1250/1250 (dalam byte) dimana **1 byte = 8 bit**. Terakhir peraturan ini hanya dapat diakses untuk grup `luffyuser` dan `luffyimage`
+4. Selanjutnya, kita rubah konfigurasi pada `squid.conf` untuk memasukkan script konfigurasi `acl-bandwidth.conf` tersebut
+![image](https://user-images.githubusercontent.com/55140514/141620611-b7607fbb-78ec-4cdd-bcc8-28e0f8aec45c.png)
+
+Setelah itu di restart proxy nya dengan `service squid restart`
+5. Kita lakukan testing dengan kedua user tersebut
+**User luffybelikapalE12**
+![image](https://user-images.githubusercontent.com/55140514/141622244-5992c4e3-393c-4a9e-bfcf-6194dd53cc3c.png)
+
+**User ZorobelikapalE12**
+![image](https://user-images.githubusercontent.com/55140514/141624051-9d908361-9824-4539-bb8a-964196608311.png)
+
+### Note
+1. Dapat dilihat bahwa pada user zoro tidak terdapat delay sedangkan pada user luffy ada
