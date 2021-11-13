@@ -433,6 +433,7 @@ cp -r /etc/apache2/sites-available/000.default.conf /etc/apache2/sites-available
 
 7. Lalu, hasil *unzip* kita dipindah kan ke dalam directory tersebut 
 `mv super.franky/error super.franky/public /var/www/super.franky.e12.com`
+
 ![image](https://user-images.githubusercontent.com/55140514/141613697-5ad055ea-4fbd-42df-b7d4-c239c34fa1f7.png)
 
 8. Terakhir untuk web server nya adalah untuk melakukan `service apache2 restart` serta mengaktifkan website dengan `a2ensite super.franky.e12.com.conf`
