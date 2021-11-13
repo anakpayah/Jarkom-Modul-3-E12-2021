@@ -298,14 +298,36 @@ hardware ethernet yang digunakan merupakan link/ether dari eth0 Skypie, lalu fix
 Loguetown digunakan sebagai client Proxy agar transaksi jual beli dapat terjamin keamanannya, juga untuk mencegah kebocoran data transaksi. Pada Loguetown, proxy harus bisa diakses dengan nama jualbelikapal.yyy.com dengan port yang digunakan adalah 5000.
 
 **Pembahasan:**
-1. Langkah pertama yang kita lakukan adalah untuk membuat **DNS** untuk `jualbelikapal.e12.com` dimana kita akan merubah configurasi pada `/etc/bind/named.conf.local` seperti berikut 
+1. Langkah pertama, kita akan menggunakan node `EnniesLobby` untuk membuat **DNS** untuk `jualbelikapal.e12.com` dimana kita akan merubah configurasi pada `/etc/bind/named.conf.local` seperti berikut 
+![image](https://user-images.githubusercontent.com/55140514/141610177-484d0e0f-1766-4ae6-90bc-78bd3eab2963.png)
 
+2. Lalu, kita membuat *directory* sesuai dengan yang kita buat di konfigurasi `/etc/bind/named.conf.local` dengan `mkdir` dan salin *template* **db.local** dari directory bind dan diubah sesuai dengan soal seperti berikut
+![image](https://user-images.githubusercontent.com/55140514/141610291-e55bdd44-2b05-42bd-8e67-7776588a5a75.png)
+
+Setelah itu dilakukan `restart bind9`
+
+3. Selanjutnya, kita menggunakan node `Water7` sebagai proxy server untuk melakukan konfigurasi proxy. Pada awalnya kita akan menyimpan konfigurasi awal `squid.conf` ke `squid.conf.bak` sebagai backup. Lalu, dirubah agar menggunakan `port 5000` dan merubah nama yang mengakses menjadi `jualbelikapal.e12.com` seperti berikut
+![image](https://user-images.githubusercontent.com/55140514/141610529-eabf1787-a11b-452b-9b84-b7b03a672008.png)
+
+4. Untuk melakukan testing kita akan pindah ke *proxy client* dimana pada soal diminta adalah `Loguetown`. Disini kita akan menginstall *lynx* dengan 
+`apt-get install lynx -y` 
+Setelah itu kita memasangkan proxy pada client ini dengan mengarah ke proxy yang telah kita buat yaitu `jualbelikapal.e12.com` dan menggunakan perintah berikut
+`export http_proxy="http://jualbelikapal.e12.com:5000"`
+
+5. Terakhir kita lakukan perintah `lynx google.com` untuk mengakses google.com. Hasilnya adalah berikut
+![image](https://user-images.githubusercontent.com/55140514/141610697-a3bb933e-c92c-4552-9104-6da969f946ed.png)
+
+Bisa dilihat bahwa nama pengakses berubah menjadi `jualbelikapal.e12.com` pada di bawah
+
+**Note**
+1. Karena kita tidak menggunakan perintah untuk mengakses web maka kita tidak bisa masuk ke `google.com`. Untuk itu kita merubahkan `squid.conf` dengan menambah line `http_access allow all`
 
 ## Soal 9
 
 Agar transaksi jual beli lebih aman dan pengguna website ada dua orang, proxy dipasang autentikasi user proxy dengan enkripsi MD5 dengan dua username, yaitu luffybelikapalyyy dengan password luffy_yyy dan zorobelikapalyyy dengan password zoro_yyy.
 
 **Pembahasan:**
+1. 
 
 ## Soal 10
 
