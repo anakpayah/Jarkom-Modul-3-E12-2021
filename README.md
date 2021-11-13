@@ -393,6 +393,64 @@ date --set "11 Nov 2021 18:00:00"
 Agar transaksi bisa lebih fokus berjalan, maka dilakukan redirect website agar mudah mengingat website transaksi jual beli kapal. Setiap mengakses google.com, akan diredirect menuju super.franky.yyy.com dengan website yang sama pada soal shift modul 2. Web server super.franky.yyy.com berada pada node Skypie.
 
 **Pembahasan:**
+1. Langkah pertama yang kita lakukan adalah untuk membuat **DNS** `super.franky.e12.com` seperti pada nomor 8. pertama mengubah `/etc/bind/named.conf.local` menjadi berikut
+![image](https://user-images.githubusercontent.com/55140514/141612758-0c6cf7d9-01df-428a-875d-f09604792554.png)
+
+2. Lalu, membuat directory `sunnygo` sesuai yang di konfigurasi dan membuat file untuk `super.franky.e12.com` di directory tersebut dengan konfigurasi berikut
+```
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     super.franky.e12.com. root.super.franky.e12.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      super.franky.e12.com.
+@       IN      A       10.35.3.69 ; IP Skypie
+www     IN      CNAME   super.franky.e12.com.
+```
+Setelah itu kita `service bind9 restart`
+
+3. Lalu, kita ke node `skypie` dan menginstall `apache2`, `wget`, dan `unzip`. Pertama yang kita lakukan adalah mengambil file yang diminta soal dan melakukan unzip pada file tersebut
+```
+wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/super.franky.zip
+unzip super.franky.zip
+```
+
+4. Setelah itu kita membuat file konfigurasi `super.franky.e12.com.conf` untuk web server kita di `etc/apache2/sites-available`. Pertama kita *copy* file `000.default.conf` ke file `super.franky.e12.com.conf`
+```
+cp -r /etc/apache2/sites-available/000.default.conf /etc/apache2/sites-available/super.franky.e12.com.conf
+```
+5. Lalu, kita masuk ke file `super.franky.e12.com.conf` dan mengubah konfigurasi `DocumentRoot`, `ServerName`, dan `ServerAlias` seperti berikut
+ ![image](https://user-images.githubusercontent.com/55140514/141613479-b634f83c-ddf7-43fb-8b81-d2909abff4e9.png)
+
+6. Selanjutnya kita membuat directory untuk isi web kita seperti berikut 
+`mkdir /var/www/super.franky.e12.com`
+
+7. Lalu, hasil *unzip* kita dipindah kan ke dalam directory tersebut 
+`mv super.franky/error super.franky/public /var/www/super.franky.e12.com`
+![image](https://user-images.githubusercontent.com/55140514/141613697-5ad055ea-4fbd-42df-b7d4-c239c34fa1f7.png)
+
+8. Terakhir untuk web server nya adalah untuk melakukan `service apache2 restart` serta mengaktifkan website dengan `a2ensite super.franky.e12.com.conf`
+
+9. Pindah ke `Proxy Server (Water7)` untuk melakukan *redirect* dari `google.com` ke `super.franky.e12.com`. Disini kita akan mengubah konfigurasi `squid.conf` dengan menambahkan line-line berikut
+```
+acl BLACKLIST dstdomain google.com
+http_access deny BLACKLIST
+deny_info http://super.franky.e12.com/ BLACKLIST
+```
+Disini kita membuat acl grup bernama `BLACKLIST` yang berisikan domain name yang diinginkan. Lalu, domain yang ada di grup BLACKLIST ini akan diblokir / deny access nya dan return ke http://super.franky.e12.com/. Setelah itu, dilakukan restart pada Proxy Server agar jalan redirect-nya.
+
+10. Untuk testing kita pindah ke `Loguetown` dan mencoba `lynx google.com`. Hasil sebagai berikut
+![image](https://user-images.githubusercontent.com/55140514/141613947-e6a2ea22-db92-4425-bd42-a728cd99d549.png)
+
+![image](https://user-images.githubusercontent.com/55140514/141614022-25ddd874-c6bb-4180-89ca-7b06bf1921c5.png)
+
+![image](https://user-images.githubusercontent.com/55140514/141614014-6c05720f-828f-4257-bf9b-383e21b6e526.png)
 
 ## Soal 12-13
 
