@@ -375,9 +375,10 @@ http_access deny all
 date --set "11 Nov 2021 11:00:00"
 date --set "11 Nov 2021 18:00:00"
 ```
-**Diluar eange waktu akses**
+**Diluar range waktu akses**
 
 ![image](https://user-images.githubusercontent.com/55140514/141612002-913b33e6-a06a-42ec-8c88-cede26f4aabb.png)
+
 ![image](https://user-images.githubusercontent.com/55140514/141612023-7d0479b9-549a-4299-9bfa-906845535f95.png)
 ![image](https://user-images.githubusercontent.com/55140514/141612032-2bfff301-be0b-49e0-8b4a-175456fb5205.png)
 
