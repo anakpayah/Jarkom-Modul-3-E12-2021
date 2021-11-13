@@ -475,10 +475,12 @@ delay_parameters 1 1250/1250
 ```
 Disini kita hanya menggunakan 1 peraturan dimana itu mengatur hanya kecepatan untuk user luffy. Pertama kita menggunakan fungsi acl `url_regex` untuk mengambil file yang berakhiran dengan **png atau jpg**, kita masukkan peraturan ini pada acl grup `luffyuser`.
 Lalu, ada juga fungsi acl `proxy_auth_regex` dimana akan mengambil nama dari user untuk autentikasi proxy yang digunakan. Disini kita set untuk mencari nama luffy. Untuk kecepatan kita rubah pada `delay_parameters` dimana kita set untuk menjadi 1250/1250 (dalam byte) dimana **1 byte = 8 bit**. Terakhir peraturan ini hanya dapat diakses untuk grup `luffyuser` dan `luffyimage`
+
 4. Selanjutnya, kita rubah konfigurasi pada `squid.conf` untuk memasukkan script konfigurasi `acl-bandwidth.conf` tersebut
 ![image](https://user-images.githubusercontent.com/55140514/141620611-b7607fbb-78ec-4cdd-bcc8-28e0f8aec45c.png)
 
 Setelah itu di restart proxy nya dengan `service squid restart`
+
 5. Kita lakukan testing dengan kedua user tersebut
 
 **User luffybelikapalE12**
