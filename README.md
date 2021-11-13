@@ -298,6 +298,8 @@ hardware ethernet yang digunakan merupakan link/ether dari eth0 Skypie, lalu fix
 Loguetown digunakan sebagai client Proxy agar transaksi jual beli dapat terjamin keamanannya, juga untuk mencegah kebocoran data transaksi. Pada Loguetown, proxy harus bisa diakses dengan nama jualbelikapal.yyy.com dengan port yang digunakan adalah 5000.
 
 **Pembahasan:**
+1. Langkah pertama yang kita lakukan adalah untuk membuat **DNS** untuk `jualbelikapal.e12.com` dimana kita akan merubah configurasi pada `/etc/bind/named.conf.local` seperti berikut 
+
 
 ## Soal 9
 
